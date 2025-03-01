@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage ('Chechout code') {
             steps {
-                git 'https://github.com/Sharathi25/new-java.git'
+                git 'https://github.com/Sharathi25/new-java/tree/sub-branch'
             }
         }
 

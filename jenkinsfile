@@ -10,7 +10,7 @@ pipeline {
         stage ('Checkout Code') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
-                    git branch: 'sub-branch',  // ✅ Replace with your actual branch name
+                    git branch: 'master',  // ✅ Replace with your actual branch name
                         credentialsId: 'github-credentials', 
                         url: 'https://github.com/Sharathi25/new-java.git'  // ✅ Corrected URL
                 }

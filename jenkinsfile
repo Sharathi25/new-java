@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+
+    environment{
+        IMAGE_NAME = "your-dockerhub-sharathi25/java-helloworld"
+        IMAGE_TAG = "latest"
+    }
+
+    stages {
+        stage ('Chechout code') {
+            steps {
+                git 'https://github.com/Sharathi25/new-java.git'
+            }
+        }
+
+        stage ('Build java App') {
+        steps {
+            sh 'mvn clean install'
+        }
+    }
+     stage ('Build Docker image') {
+
+        steps {
+            sh 'docker build -t $IMAGE_NAME:$IMAGE_TAG .'
+        }
+     }
+    stage('Push Docker image to docekrhub') {
+        steps {
+            withDockerRegistry([credentialsId: 'docker-hub-credentials', url: '']) {
+                sh 'docker push $IMAGE_NAME:$IMAGE_TAG'
+            }
+        }
+    }
+
+    }
+}

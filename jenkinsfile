@@ -9,7 +9,8 @@ pipeline {
     stages {
         stage ('Chechout code') {
             steps {
-                git 'https://github.com/Sharathi25/new-java/tree/sub-branch'
+                withCredentials([string(credentialsId: 'github-credentials', variable: 'GITHUB_TOKEN')]) {
+                    sh 'git clone https://$GITHUB_TOKEN@github.com/Sharathi25/https://github.com/Sharathi25/new-java.git'
             }
         }
 
